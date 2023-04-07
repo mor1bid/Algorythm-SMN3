@@ -1,13 +1,16 @@
 public class dz3 {
     Node head;
-
-    public void revert() {
+    
+    public void revert() 
+    {
         if (head != null && head.next != null) 
         {
+            Node temp = head;
             revert(head.next, head);
+            temp.next = null;
         }
 
-    }; //запуск 
+    }
     private void revert(Node currentNode, Node previousNode)
     {
         if(currentNode.next == null) 
@@ -16,15 +19,17 @@ public class dz3 {
         }
         else 
         {
-            revert(currentNode.next, currentNode);
+            revert(currentNode, currentNode.previous);
         }
-        currentNode = previousNode; //поворот
-        previousNode.next = null;
+        currentNode = currentNode.previous; //поворот
+        currentNode.next = currentNode.previous;
+        currentNode.previous = null;
     }
 
     public class Node 
     {
         int value;
         Node next;
+        Node previous;
     }
 }
